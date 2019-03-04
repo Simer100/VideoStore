@@ -1,0 +1,19 @@
+C:\Users\SS077\source\repos\innnnsan\Video Store\bin\Release\Video_Store.exe.config
+C:\Users\SS077\source\repos\innnnsan\Video Store\bin\Release\Video_Store.exe
+C:\Users\SS077\source\repos\innnnsan\Video Store\bin\Release\Video_Store.pdb
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\login.g.cs
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Main.g.cs
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\RegisterPage.g.cs
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\App.g.cs
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video_Store_MarkupCompile.cache
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video_Store_MarkupCompile.lref
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\login.baml
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Main.baml
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\RegisterPage.baml
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video_Store.g.resources
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video_Store.Properties.Resources.resources
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video Store.csproj.GenerateResource.cache
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video Store.csproj.CoreCompileInputs.cache
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video_Store.exe
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video_Store.pdb
+C:\Users\SS077\source\repos\innnnsan\Video Store\obj\Release\Video Store.csprojAssemblyReference.cache
