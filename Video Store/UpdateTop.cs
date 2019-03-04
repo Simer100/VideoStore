@@ -12,7 +12,7 @@ namespace Video_Store
 {
     class UpdateTop
     {
-        SqlConnection Update_con = new SqlConnection("Data Source=WT135-826LSW\\SQLEXPRESS;Initial Catalog=RENT;Integrated Security=True");
+        SqlConnection Update_con = new SqlConnection("Data Source=GILL-PC;Initial Catalog=RENT;Integrated Security=True");
 
         SqlCommand cmd_Update = new SqlCommand();
 
@@ -24,7 +24,7 @@ namespace Video_Store
         public string S2 { get; private set; }
         public string Strr { get; private set; }
 
-        public void UpdateRent(int RMID, int MoviedID, DateTime DateRent, DateTime DateReturned)
+        public void UpdateRent(int RMID, int MovieID, DateTime DateRent, DateTime DateReturned)
         {
             try
             {
@@ -33,8 +33,8 @@ namespace Video_Store
                 int RentTotal = 0, Cost = 0;
                 double days = (DateReturned - DateRent).TotalDays;
 
-                string S1 = "Select Rental_Cost from Movies where MoviedID = @MovieIDFK";
-                cmd_Update.Parameters.AddWithValue("@MovieIDFK", MoviedID);
+                string S1 = "Select Rental_Cost from Movies where MovieID = @MovieIDFK";
+                cmd_Update.Parameters.AddWithValue("@MovieIDFK", MovieID);
 
                 cmd_Update.CommandText = S1;
                 Update_con.Open();
@@ -59,15 +59,9 @@ namespace Video_Store
                 cmd_Update.ExecuteNonQuery();
 
 
-                S2 = "Update Movies set Copies = Copies+1 where MoviedID = @MovieIDFK";
-                this.cmd_Update.CommandText = this.S2;
+                
 
-                this.cmd_Update.ExecuteNonQuery();
-
-                S2 = "Update RentedMovies set isout = 0 where RMID = @RMID";
-                this.cmd_Update.CommandText = this.S2;
-
-                this.cmd_Update.ExecuteNonQuery();
+               
 
                 MessageBox.Show("Total Rent is " + RentTotal);
             }
@@ -164,10 +158,10 @@ namespace Video_Store
                 }
 
 
-                this.Strr = "Select Title from Movies where MoviedID ='" + Top + "'";
+                this.Strr = "Select Title from Movies where MovieID ='" + Top + "'";
                 this.cmd_Update.CommandText = this.Strr;
                 String Title = Convert.ToString(cmd_Update.ExecuteScalar());
-                MessageBox.Show(Title + " (MoviedID " + Top + " ) is maximum rented movie with " + Maxed +
+                MessageBox.Show(Title + " (MovieID " + Top + " ) is maximum rented movie with " + Maxed +
                                 " times");
             }
             catch (Exception exception)
@@ -184,16 +178,16 @@ namespace Video_Store
 
 
         }//below method is used to update the data in video section
-        public void UpdateVideo(int MoviedID, string Rating, string Title, int Year, string Plot, string Genre, int copies)
+        public void UpdateVideo(int MovieID, string Rating, string Title, int Year, string Plot, string Genre, int copies)
         {
             try
             {
                 cmd_Update.Parameters.Clear();
                 cmd_Update.Connection = Update_con;
-                Update = "Update Movies Set Rating = @Rating, Title = @Title, Year = @Year,  Plot = @Plot, Genre = @Genre, copies = @copies where MoviedID like @MoviedID";
+                Update = "Update Movies Set Rating = @Rating, Title = @Title, Year = @Year,  Plot = @Plot, Genre = @Genre, copies = @copies where MovieID like @MovieID";
 
 
-                cmd_Update.Parameters.AddWithValue("@MoviedID", MoviedID);
+                cmd_Update.Parameters.AddWithValue("@MovieID", MovieID);
                 cmd_Update.Parameters.AddWithValue("@Rating", Rating);
                 cmd_Update.Parameters.AddWithValue("@Title", Title);
                 cmd_Update.Parameters.AddWithValue("@Year", Year);

@@ -12,7 +12,7 @@ namespace Video_Store
 {
     class AddDelete
     {
-        SqlConnection AddDelete_con = new SqlConnection("Data Source=WT135-826LSW\\SQLEXPRESS;Initial Catalog=RENT;Integrated Security=True");
+        SqlConnection AddDelete_con = new SqlConnection("Data Source=GILL-PC;Initial Catalog=RENT;Integrated Security=True");
 
         SqlCommand cmd_AddDelete = new SqlCommand();
 
@@ -151,7 +151,7 @@ namespace Video_Store
                 }
             }
         }
-        public void Movie_delete(int MoviedID)
+        public void Movie_delete(int MovieID)
         {
             try
             {
@@ -159,29 +159,23 @@ namespace Video_Store
                 cmd_AddDelete.Connection = this.AddDelete_con;
 
 
-                //first of the all select the record from the Rented Movie is he already has a movie on rent or not if he has a movie on rent then he can't be able to delete the record from the table
                 String S1 = "";
-                S1 = "select Count(*) from RentalMovies where MovieIDFK= @MovieID and isout ='1' ";
-                SqlParameter[] parameterArray = new SqlParameter[] { new SqlParameter("@MoviedID", MoviedID) };
+                SqlParameter[] parameterArray = new SqlParameter[] { new SqlParameter("@MovieID", MovieID) };
                 cmd_AddDelete.Parameters.Add(parameterArray[0]);
 
                 cmd_AddDelete.CommandText = S1;
                 AddDelete_con.Open();
-                int count = Convert.ToInt32(cmd_AddDelete.ExecuteScalar());
-                if (count == 0)
-                {
-                    S1 = "Delete from Movies where MoviedID like @MoviedID";
-                    cmd_AddDelete.CommandText = S1;
-                    cmd_AddDelete.ExecuteNonQuery();
-                    MessageBox.Show("Movie Deleted");
-                }
-                else
-                {
-                    //if the movie is on rent then the message is displayed 
-                    MessageBox.Show("Customer has rented the movie. First take the movie back than you can delete the movie");
-                }
+
+                S1 = "Delete from Movies where MovieID like @MovieID";
+                cmd_AddDelete.CommandText = S1;
+                cmd_AddDelete.ExecuteNonQuery();
+                MessageBox.Show("Movie Deleted");
+
 
             }
+
+
+
             catch (Exception exception)
             {
                 MessageBox.Show("Database Exception" + exception.Message);
@@ -192,7 +186,6 @@ namespace Video_Store
                 {
                     this.AddDelete_con.Close();
                 }
-
             }
         }
         public DataTable Load_customer()
@@ -259,7 +252,7 @@ namespace Video_Store
                     MessageBox.Show("User Deleted");
               
                
-             }
+            }
 
 
 
@@ -321,7 +314,7 @@ namespace Video_Store
 
 
 
-        public void AddRented(int MovieIDFK, int CustIDFK, DateTime DateRented, int copies, int isout)
+        public void AddRented(int MovieIDFK, int CustIDFK, DateTime DateRented)
         {
             try
             {
@@ -330,13 +323,13 @@ namespace Video_Store
 
 
 
-                Add = "Insert into RentedMovies(MovieIDFK, CustIDFK, DateRented ,isout) Values( @MovieIDFk, @CustIDFK, @DateRented, @isout)";
+                Add = "Insert into RentedMovies(MovieIDFK, CustIDFK, DateRented) Values( @MovieIDFk, @CustIDFK, @DateRented)";
 
                 cmd_AddDelete.Parameters.AddWithValue("@MovieIDFK", MovieIDFK);
                 cmd_AddDelete.Parameters.AddWithValue("@CustIDFK", CustIDFK);
                 cmd_AddDelete.Parameters.AddWithValue("@DateRented", DateRented);
-                cmd_AddDelete.Parameters.AddWithValue("@isout", isout);
-                cmd_AddDelete.Parameters.AddWithValue("@copies", copies);
+              
+                
 
 
                 cmd_AddDelete.CommandText = Add;
@@ -347,7 +340,7 @@ namespace Video_Store
                 // Query is exicuted
                 cmd_AddDelete.ExecuteNonQuery();
 
-                Add = "Update Movies set copies = copies-1 where MoviedID = @MovieIDFK";
+                Add = "Update Movies set copies = copies-1 where MovieID = @MovieIDFK";
                 cmd_AddDelete.CommandText = Add;
                 cmd_AddDelete.ExecuteNonQuery();
 

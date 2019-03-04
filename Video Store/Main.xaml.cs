@@ -116,8 +116,7 @@ namespace Video_Store
         private void Deletecustomer(object sender, RoutedEventArgs e)
         {
             int CustID = Convert.ToInt32(Custid.Text);
-            if (dialogResult.ToString() == "Yes")
-            {
+            
                 Obj_AddDelete.Customer_Delete(CustID);
                 Customerdatagrid.ItemsSource = Obj_AddDelete.Load_customer().DefaultView;
                 First_name.Text = "";
@@ -126,7 +125,7 @@ namespace Video_Store
                 Last_name.Text = "";
 
 
-            }
+            
         }
 
         private void loaddatacustomer(object sender, RoutedEventArgs e)
@@ -208,11 +207,11 @@ namespace Video_Store
         private void DeleteMovie(object sender, RoutedEventArgs e)
         {
 
-            int movie = Convert.ToInt32(Videoid.Text);
+            int MovieID = Convert.ToInt32(Videoid.Text);
 
 
 
-            Obj_AddDelete.Customer_Delete(movie);
+            Obj_AddDelete.Movie_delete(MovieID);
             Rentaldatagrid.ItemsSource = Obj_AddDelete.List_Rented().DefaultView;
             Videodatagrid.ItemsSource = Obj_AddDelete.Show_Videos().DefaultView;
             Customerdatagrid.ItemsSource = Obj_AddDelete.Load_customer().DefaultView;
@@ -246,7 +245,7 @@ namespace Video_Store
             Genre_Movie.Text = Convert.ToString(row["Genre"]);
             Year_Movie.Text = Convert.ToString(row["Year"]);
             Rating_movie.Text = Convert.ToString(row["Rating"]);
-            Videoid.Text = Convert.ToString(row["MoviedID"]);
+            Videoid.Text = Convert.ToString(row["MovieID"]);
             copies.Text = Convert.ToString(row["copies"]);
 
             Rentaldatagrid.ItemsSource = Obj_AddDelete.List_Rented().DefaultView;
@@ -263,31 +262,7 @@ namespace Video_Store
 
         private void Returned_(object sender, RoutedEventArgs e)
         {
-            int RMID = Convert.ToInt32(Rmid.Text);
-            int MoviedID = Convert.ToInt32(Videoid.Text);
-
-
-
-            Obj_UpdateTop.UpdateRent(RMID, MoviedID, Convert.ToDateTime(date_issue.Text), DateTime.Now);
-
-            Rentaldatagrid.ItemsSource = Obj_AddDelete.List_Rented().DefaultView;
-            Videodatagrid.ItemsSource = Obj_AddDelete.Show_Videos().DefaultView;
-            Customerdatagrid.ItemsSource = Obj_AddDelete.Load_customer().DefaultView;
-            Videoid.Text = "";
-            Custid.Text = "";
-            Title_movie.Text = "";
-            Rating_movie.Text = "";
-            Videoid.Text = "";
-            copies.Text = "";
-            First_name.Text = "";
-            Last_name.Text = "";
-            Address_txt.Text = "";
-            Phone_number.Text = "";
-            Plot_Movie.Text = "";
-            Genre_Movie.Text = "";
-            Year_Movie.Text = "";
-
-
+            
 
         }
 
@@ -295,20 +270,16 @@ namespace Video_Store
 
         private void Issue_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (copies.Text != "0")
-
-            {
+            
                 if (Videoid.Text != "" && Custid.Text != "" && date_issue.Text != "")
                 {
                     int MovieID = Convert.ToInt32(Videoid.Text);
                     int Customerid = Convert.ToInt32(Custid.Text);
-                    date_issue.Text = DateTime.Today.ToString("dd-MM-yyyy");
-                    int copies = Convert.ToInt32(this.copies.Text);
-                    int Rent = 1;
+                    
 
 
 
-                    Obj_AddDelete.AddRented(MovieID, Customerid, DateTime.Now, copies, Rent);
+                    Obj_AddDelete.AddRented(MovieID, Customerid, DateTime.Now);
                     Videodatagrid.ItemsSource = Obj_AddDelete.Show_Videos().DefaultView;
                     Rentaldatagrid.ItemsSource = Obj_AddDelete.List_Rented().DefaultView;
                     Customerdatagrid.ItemsSource = Obj_AddDelete.Load_customer().DefaultView;
@@ -330,12 +301,9 @@ namespace Video_Store
                 }
 
             }
-            else
-            {
-                MessageBox.Show("no more copies left");
-            }
+           
 
-        }
+        
 
 
 
@@ -364,8 +332,33 @@ namespace Video_Store
             Rentaldatagrid.ItemsSource = Obj_AddDelete.List_Rented().DefaultView;
         }
 
+        private void Return_Click_1(object sender, RoutedEventArgs e)
+        {
+            int RMID = Convert.ToInt32(Rmid.Text);
+            int MovieID = Convert.ToInt32(Videoid.Text);
 
 
 
+            Obj_UpdateTop.UpdateRent(RMID, MovieID, Convert.ToDateTime(date_issue.Text), DateTime.Now);
+
+            Rentaldatagrid.ItemsSource = Obj_AddDelete.List_Rented().DefaultView;
+            Videodatagrid.ItemsSource = Obj_AddDelete.Show_Videos().DefaultView;
+            Customerdatagrid.ItemsSource = Obj_AddDelete.Load_customer().DefaultView;
+            Videoid.Text = "";
+            Custid.Text = "";
+            Title_movie.Text = "";
+            Rating_movie.Text = "";
+            Videoid.Text = "";
+            copies.Text = "";
+            First_name.Text = "";
+            Last_name.Text = "";
+            Address_txt.Text = "";
+            Phone_number.Text = "";
+            Plot_Movie.Text = "";
+            Genre_Movie.Text = "";
+            Year_Movie.Text = "";
+
+
+        }
     }
 }
